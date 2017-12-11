@@ -1,5 +1,5 @@
 Package: RMariaDB
-Version: 1.0-2
+Version: 1.0-4
 Title: Database Interface and 'MariaDB' Driver
 Encoding: UTF-8
 Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
@@ -13,7 +13,7 @@ Authors@R: c(
     person("RStudio", role = "cph"),
     person("Kungliga Tekniska Högskolan", role = "ctb", comment = "Source code for timegm"))
 Depends: R (>= 2.8.0)
-Imports: bit64, DBI, hms, methods, Rcpp (>= 0.12.4)
+Imports: bit64, DBI (>= 0.5), hms, methods, Rcpp (>= 0.12.4)
 Suggests: DBItest, rprojroot, testthat
 LinkingTo: Rcpp, BH, plogr
 License: GPL-2
@@ -29,7 +29,7 @@ Collate: 'MariaDBConnection.R' 'MariaDBDriver.R' 'MariaDBResult.R'
         'export.R' 'query.R' 'quote.R' 'rownames.R' 'table.R'
         'transaction.R' 'utils.R' 'zzz.R'
 RoxygenNote: 6.0.1
-Packaged: 2017-10-03 19:31:11 UTC; muelleki
+Packaged: 2017-12-11 17:57:16 UTC; muelleki
 Author: Kirill Müller [aut, cre],
   Jeroen Ooms [aut],
   David James [aut],
@@ -40,4 +40,4 @@ Author: Kirill Müller [aut, cre],
   Kungliga Tekniska Högskolan [ctb] (Source code for timegm)
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2017-10-04 08:39:30 UTC
+Date/Publication: 2017-12-11 22:55:30 UTC
