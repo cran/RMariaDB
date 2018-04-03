@@ -2,6 +2,7 @@
 #include <ctime>
 #include <math.h>
 #include "MariaBinding.h"
+#include "integer64.h"
 
 MariaBinding::MariaBinding() :
   statement(NULL),
@@ -129,16 +130,17 @@ bool MariaBinding::bind_next_row() {
         bindings[j].buffer_length = Rf_length(string);
       }
       break;
-    case MY_RAW: {
-      SEXP raw = VECTOR_ELT(col, i);
-      if (Rf_isNull(raw)) {
-        missing = true;
-      } else {
-        bindings[j].buffer_length = Rf_length(raw);
-        bindings[j].buffer = RAW(raw);
+    case MY_RAW:
+      {
+        SEXP raw = VECTOR_ELT(col, i);
+        if (Rf_isNull(raw)) {
+          missing = true;
+        } else {
+          bindings[j].buffer_length = Rf_length(raw);
+          bindings[j].buffer = RAW(raw);
+        }
+        break;
       }
-      break;
-    }
     case MY_DATE:
     case MY_DATE_TIME:
       if (ISNAN(REAL(col)[i])) {
@@ -162,8 +164,11 @@ bool MariaBinding::bind_next_row() {
       }
       break;
     case MY_INT64:
-      // FIXME: 64-bit handling
-      stop("Not yet supported");
+      if (INTEGER64(col)[i] == NA_INTEGER64) {
+        missing = true;
+        break;
+      }
+      bindings[j].buffer = &INTEGER64(col)[i];
       break;
     }
     is_null[j] = missing;

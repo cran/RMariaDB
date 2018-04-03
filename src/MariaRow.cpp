@@ -1,12 +1,8 @@
 #include "pch.h"
-#include <ctime>
-
-#if defined(WIN32) || defined(_WIN32) || defined(sun)
-#define timegm _mkgmtime
-#endif
 
 #include "MariaRow.h"
 #include "MariaTypes.h"
+#include "MariaUtils.h"
 #include "integer64.h"
 
 
@@ -97,6 +93,7 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
     LOG_VERBOSE << (void*)bindings_[j].error;
   }
 
+  LOG_DEBUG << "mysql_stmt_bind_result()";
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
     stop("Error binding result: %s", mysql_stmt_error(pStatement));
   }
@@ -132,10 +129,12 @@ SEXP MariaRow::value_string(int j) {
     return NA_STRING;
 
   fetch_buffer(j);
-  buffers_[j].push_back('\0');  // ensure string is null terminated
-  const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
+  int len = static_cast<int>(buffers_[j].size());
+  if (len == 0)
+    return R_BlankString;
 
-  return Rf_mkCharCE(val, CE_UTF8);
+  const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
+  return Rf_mkCharLenCE(val, len, CE_UTF8);
 }
 
 SEXP MariaRow::value_raw(int j) {
@@ -155,23 +154,27 @@ double MariaRow::value_date_time(int j) {
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
 
-  struct tm t = {};
-  t.tm_year = mytime->year - 1900;
-  t.tm_mon = mytime->month - 1;
-  t.tm_mday = mytime->day;
-  t.tm_hour = mytime->hour;
-  t.tm_min = mytime->minute;
-  t.tm_sec = mytime->second;
-
-  double split_seconds = static_cast<double>(mytime->second_part) / 1000000.0;
-  return static_cast<double>(timegm(&t)) + split_seconds;
+  const int days = days_from_civil(mytime->year, mytime->month, mytime->day);
+  double date_time =
+    static_cast<double>(days) * 86400.0 +
+    static_cast<double>(mytime->hour) * (60.0 * 60) +
+    static_cast<double>(mytime->minute) * 60.0 +
+    static_cast<double>(mytime->second) +
+    static_cast<double>(mytime->second_part) / 1000000.0;
+  LOG_VERBOSE << date_time;
+  return date_time;
 }
 
 double MariaRow::value_date(int j) {
   if (is_null(j))
     return NA_REAL;
 
-  return value_date_time(j) / 86400.0;
+  MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
+
+  const int days = days_from_civil(mytime->year, mytime->month, mytime->day);
+  double date_time = static_cast<double>(days);
+  LOG_VERBOSE << date_time;
+  return date_time;
 }
 
 double MariaRow::value_time(int j) {
@@ -232,6 +235,7 @@ void MariaRow::fetch_buffer(int j) {
   LOG_VERBOSE << bindings_[j].is_unsigned;
   LOG_VERBOSE << (void*)bindings_[j].error;
 
+  LOG_DEBUG << "mysql_stmt_fetch_column()";
   int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
   LOG_VERBOSE << result;
 

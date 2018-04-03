@@ -11,18 +11,18 @@ Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/rstats-db/RMariaDB}
+  \item \url{https://github.com/r-dbi/RMariaDB}
   \item \url{https://downloads.mariadb.org/connector-c/}
-  \item Report bugs at \url{https://github.com/rstats-db/RMariaDB/issues}
+  \item Report bugs at \url{https://github.com/r-dbi/RMariaDB/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org} (0000-0002-1416-3412)
 
 Authors:
 \itemize{
-  \item Jeroen Ooms
+  \item Jeroen Ooms (0000-0002-4035-0289)
   \item David James
   \item Saikat DebRoy
   \item Hadley Wickham
@@ -31,8 +31,8 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item R Consortium [funder]
   \item RStudio [copyright holder]
-  \item Kungliga Tekniska Högskolan (Source code for timegm) [contributor]
 }
 
 }

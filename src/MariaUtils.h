@@ -1,5 +1,5 @@
-#ifndef __RSQLITE_MY_UTILS__
-#define __RSQLITE_MY_UTILS__
+#ifndef __RMARIADB_MY_UTILS__
+#define __RMARIADB_MY_UTILS__
 
 // Generic data frame utils ----------------------------------------------------
 
@@ -11,5 +11,7 @@ void df_s3(const List& df, const std::vector<MariaFieldType>& types);
 List df_create(const std::vector<MariaFieldType>& types,
                const std::vector<std::string>& names,
                int n);
+
+int days_from_civil(int y, int m, int d);
 
 #endif
