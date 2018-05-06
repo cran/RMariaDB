@@ -72,7 +72,8 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 #' @param field.types Optional, overrides default choices of field types,
 #'   derived from the classes of the columns in the data frame.
 #' @param temporary If `TRUE`, creates a temporary table that expires
-#'   when the connection is closed.
+#'   when the connection is closed. For `dbRemoveTable()`, only temporary
+#'   tables are considered if this argument is set to `TRUE`.
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
@@ -97,8 +98,11 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (overwrite && append) {
       stopc("overwrite and append cannot both be TRUE")
     }
+    if (!is.null(field.types) && !(is.character(field.types) && !is.null(names(field.types)) && !anyDuplicated(names(field.types)))) {
+      stopc("`field.types` must be a named character vector with unique names, or NULL")
+    }
     if (append && !is.null(field.types)) {
-      stopc("Cannot specify field.types with append = TRUE")
+      stopc("Cannot specify `field.types` with `append = TRUE`")
     }
 
     need_transaction <- !connection_is_transacting(conn@ptr)
@@ -118,35 +122,37 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (overwrite) {
-      dbRemoveTable(conn, name, temporary = temporary, safe = TRUE)
+      dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
     }
 
+    value <- sql_data(value[, , drop = FALSE], row.names)
+
     if (!found || overwrite) {
-      sql <- sqlCreateTable(
-        conn,
-        name,
-        if (is.null(field.types)) value else field.types,
-        row.names = row.names,
+      if (is.null(field.types)) {
+        combined_field_types <- lapply(value, dbDataType, dbObj = conn)
+      } else {
+        combined_field_types <- rep("", length(value))
+        names(combined_field_types) <- names(value)
+        field_types_idx <- match(names(field.types), names(combined_field_types))
+        stopifnot(!any(is.na(field_types_idx)))
+        combined_field_types[field_types_idx] <- field.types
+        values_idx <- setdiff(seq_along(value), field_types_idx)
+        combined_field_types[values_idx] <- lapply(value[values_idx], dbDataType, dbObj = conn)
+      }
+
+      dbCreateTable(
+        conn = conn,
+        name = name,
+        fields = combined_field_types,
         temporary = temporary
       )
-      dbExecute(conn, sql)
     }
 
     if (nrow(value) > 0) {
-      values <- sql_data(value[, , drop = FALSE], row.names)
-
-      name <- dbQuoteIdentifier(conn, name)
-      fields <- dbQuoteIdentifier(conn, names(values))
-      params <- rep("?", length(fields))
-
-      sql <- paste0(
-        "INSERT INTO ", name, " (", paste0(fields, collapse = ", "), ")\n",
-        "VALUES (", paste0(params, collapse = ", "), ")"
-      )
-      rs <- dbSendStatement(conn, sql)
-      tryCatch(
-        result_bind(rs@ptr, values),
-        finally = dbClearResult(rs)
+      dbAppendTable(
+        conn = conn,
+        name = name,
+        value = value
       )
     }
 
@@ -316,14 +322,11 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 
 #' @export
 #' @rdname mariadb-tables
+#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
+#'   table doesn't exist.
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
-  function(conn, name, ...){
+  function(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE) {
     extra <- list(...)
-    # Don't document or export yet
-    safe <- extra[["safe"]]
-    if (is.null(safe)) safe <- FALSE
-    temporary <- extra[["temporary"]]
-    if (is.null(temporary)) temporary <- FALSE
 
     name <- dbQuoteIdentifier(conn, name)
     dbExecute(
@@ -332,7 +335,7 @@ setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
         "DROP ",
         if (temporary) "TEMPORARY ",
         "TABLE ",
-        if (safe) "IF EXISTS ",
+        if (!fail_if_missing) "IF EXISTS ",
         name
       )
     )

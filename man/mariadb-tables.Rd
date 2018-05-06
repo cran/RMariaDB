@@ -30,7 +30,8 @@
 
 \S4method{dbExistsTable}{MariaDBConnection,character}(conn, name, ...)
 
-\S4method{dbRemoveTable}{MariaDBConnection,character}(conn, name, ...)
+\S4method{dbRemoveTable}{MariaDBConnection,character}(conn, name, ...,
+  temporary = FALSE, fail_if_missing = TRUE)
 }
 \arguments{
 \item{conn}{a \linkS4class{MariaDBConnection} object, produced by
@@ -67,7 +68,8 @@ in the DBMS.  If appending, then the table (or temporary table)
 must exist, otherwise an error is reported. Its default is \code{FALSE}.}
 
 \item{temporary}{If \code{TRUE}, creates a temporary table that expires
-when the connection is closed.}
+when the connection is closed. For \code{dbRemoveTable()}, only temporary
+tables are considered if this argument is set to \code{TRUE}.}
 
 \item{header}{logical, does the input file have a header line? Default is the
 same heuristic used by \code{read.table()}, i.e., \code{TRUE} if the first
@@ -86,8 +88,11 @@ the input file to create the proper table definition. Default is 50.}
 \code{\"}.)}
 
 \item{prefix}{A fully qualified path in the database's namespace, or \code{NULL}.
-will be passed to \code{\link[=dbUnquoteIdentifier]{dbUnquoteIdentifier()}}.
+This argument will be processed with \code{\link[=dbUnquoteIdentifier]{dbUnquoteIdentifier()}}.
 If given the method will return all objects accessible through this prefix.}
+
+\item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
+table doesn't exist.}
 }
 \value{
 A data.frame in the case of \code{dbReadTable()}; otherwise a logical

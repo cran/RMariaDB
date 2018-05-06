@@ -47,9 +47,27 @@ setMethod("dbFetch", "MariaDBResult",
     if (n < -1) stopc("n must be nonnegative or -1")
     if (is.infinite(n)) n <- -1
     if (trunc(n) != n) stopc("n must be a whole number")
-    sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
+    ret <- result_fetch(res@ptr, n = n)
+    ret <- convert_bigint(ret, res@bigint)
+    ret <- sqlColumnToRownames(ret, row.names)
+    set_tidy_names(ret)
   }
 )
+
+convert_bigint <- function(df, bigint) {
+  if (bigint == "integer64") return(df)
+  is_int64 <- which(vlapply(df, inherits, "integer64"))
+  if (length(is_int64) == 0) return(df)
+
+  as_bigint <- switch(bigint,
+    integer = as.integer,
+    numeric = as.numeric,
+    character = as.character
+  )
+
+  df[is_int64] <- suppressWarnings(lapply(df[is_int64], as_bigint))
+  df
+}
 
 #' @rdname query
 #' @export
@@ -72,7 +90,8 @@ dbSend <- function(conn, statement, params = NULL, is_statement) {
 
   rs <- new("MariaDBResult",
     sql = statement,
-    ptr = result_create(conn@ptr, statement, is_statement)
+    ptr = result_create(conn@ptr, statement, is_statement),
+    bigint = conn@bigint
   )
 
   if (!is.null(params)) {
@@ -146,7 +165,9 @@ NULL
 #' @export
 #' @rdname result-meta
 setMethod("dbColumnInfo", "MariaDBResult", function(res, ...) {
-  result_column_info(res@ptr)
+  df <- result_column_info(res@ptr)
+  df$name <- tidy_names(df$name)
+  df
 })
 
 #' @export

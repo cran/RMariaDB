@@ -1,3 +1,14 @@
+# RMariaDB 1.0.6 (2018-05-05)
+
+- Add support for `bigint` argument to `dbConnect()`, supported values are `"integer64"`, `"integer"`, `"numeric"` and `"character"`. Large integers are returned as values of that type (r-dbi/DBItest#133).
+- Data frames resulting from a query always have unique non-empty column names (r-dbi/DBItest#137).
+- New arguments `temporary` and `fail_if_missing` (default: `TRUE`) to `dbRemoveTable()` (r-dbi/DBI#141, r-dbi/DBI#197).
+- Using `dbCreateTable()` and `dbAppendTable()` internally (r-dbi/DBI#74).
+- Implement `format()` method for `MariaDBConnection` (r-dbi/DBI#163).
+- Reexporting `Id()`, `DBI::dbIsReadOnly()` and `DBI::dbCanConnect()`.
+- Now imports DBI 1.0.0.
+
+
 # RMariaDB 1.0.5 (2018-04-02)
 
 - `dbGetException()` is no longer reexported from DBI.
@@ -5,6 +16,7 @@
 - Values of class `"integer64"` are now supported for `dbWriteTable()` and `dbBind()` (#87).
 - Schema support, as specified by DBI: `dbListObjects()`, `dbUnquoteIdentifier()` and `Id()`.
 - Names in the `x` argument to `dbQuoteIdentifier()` are preserved in the output (r-lib/DBI#173).
+- Replace non-portable `timegm()` with private implementation (#78).
 - Update libmariadbclient to version 2.3.5 on Windows (#92, @jeroen).
 
 

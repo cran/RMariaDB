@@ -10,9 +10,24 @@ setClass("MariaDBConnection",
   slots = list(
     ptr = "externalptr",
     host = "character",
-    db = "character"
+    db = "character",
+    bigint = "character"
   )
 )
+
+# format()
+#' @export
+#' @rdname MariaDBConnection-class
+format.MariaDBConnection <- function(x, ...) {
+  if (dbIsValid(x)) {
+    info <- dbGetInfo(x)
+    details <- paste0(info$dbname, "@", info$host)
+  } else {
+    details <- "DISCONNECTED"
+  }
+
+  paste0("<MariaDBConnection> ", details)
+}
 
 # show()
 #' @export
