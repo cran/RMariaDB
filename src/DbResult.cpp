@@ -16,10 +16,16 @@ DbResult::~DbResult() {
 }
 
 DbResult* DbResult::create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement) {
-  std::auto_ptr<DbResult> res(new DbResult(con));
-  res->send_query(sql, is_statement);
+  DbResult* res = new DbResult(con);
+  try {
+    res->send_query(sql, is_statement);
+  }
+  catch (...) {
+    delete res;
+    throw;
+  }
 
-  return res.release();
+  return res;
 }
 
 void DbResult::close() {
@@ -78,7 +84,7 @@ void DbResult::send_query(const std::string& sql, bool is_statement) {
   try {
     res->send_query(sql);
   }
-  catch (MariaResultPrep::UnsupportedPS e) {
+  catch (const MariaResultPrep::UnsupportedPS& e) {
     res.reset(NULL);
     // is_statement info might be worthwhile to pass to simple queries as well
     res.reset(new MariaResultSimple(this));

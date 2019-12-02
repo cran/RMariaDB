@@ -1,6 +1,6 @@
-b63706faadd23b1e8dbab7cb8e6565fa *DESCRIPTION
+331152244288f09f10e065f39a97f169 *DESCRIPTION
 563449eabe8b31e6b67d98e3d183834b *NAMESPACE
-b1db8d22ac2a50b07cd64569ab38958b *NEWS.md
+684eeb8f69cf3fa3717e5cd9cbf37e82 *NEWS.md
 810f4aa814a3886427da3fb6b930aef2 *R/MariaDBConnection.R
 6ccb1068fcdcafee929a959db19a5fb0 *R/MariaDBDriver.R
 cad38a4602121f635bb6e607bbb0c540 *R/MariaDBResult.R
@@ -18,7 +18,7 @@ cbc27ae4f51c4e0659fb42806e072759 *R/quote.R
 7b0e62ece5166ad0dc6c1de7cb1f559b *R/transaction.R
 7fd033962caa9afd897113adbb999c0b *R/utils.R
 9f82903040d7479bdfb228e05d1af323 *R/zzz.R
-599b4fa566e40640dbaa3fbb4a4d402f *README.md
+8725eef7eeb7df35ed68384bc12bd3b3 *README.md
 6071edd604dbeb75308cfbedc7790398 *cleanup
 7c38908192d422240328e4be36972781 *configure
 d41d8cd98f00b204e9800998ecf8427e *configure.win
@@ -39,7 +39,7 @@ ab3e334858adafd39904d78c90b3b3e0 *man/reexports.Rd
 babd03860508c1ed4ca34123564450a2 *man/transactions.Rd
 05003de2d4e6a0155a95a199780f261c *src/DbConnection.cpp
 9cd42584dfdc6b99e579f44df9620d16 *src/DbConnection.h
-c5b2eb54568428b12b1174d0725e16f9 *src/DbResult.cpp
+19f9421210f7ebca85b64b05b27ca5c3 *src/DbResult.cpp
 56069f978941c9f80bad382f2a367bc8 *src/DbResult.h
 111e1efb50ff675feb507ea42a24b300 *src/Makevars.in
 70725447b201817fb88a4773dab13090 *src/Makevars.win
@@ -59,7 +59,7 @@ f389b9c647accb56d589993997a20a4b *src/MariaUtils.cpp
 1b18e581e0506d600c3b0c8dd2087fa3 *src/MariaUtils.h
 5b9bba5a6b0cf22ba5949607ea1ec3f8 *src/RMariaDB_types.h
 d4f65ffeacac043f7055b1a6973ec9ba *src/RcppExports.cpp
-a5f411e3b1a0ab39c13f66189c27d80b *src/connection.cpp
+9081efd455d28c940e7fbad033e237e9 *src/connection.cpp
 88bea026e3455aaf37871723c6c3c99e *src/driver.cpp
 b91130194079431469c18780f481e22f *src/integer64.h
 3838306908db4db4365cdaea58ae90ef *src/pch.h

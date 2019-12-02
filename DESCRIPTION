@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: c(
     person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")),
     person("Jeroen", "Ooms", role = "aut", comment = c(ORCID = "0000-0002-4035-0289")),
@@ -29,7 +29,7 @@ Collate: 'MariaDBConnection.R' 'MariaDBDriver.R' 'MariaDBResult.R'
         'RMariaDB.R' 'RcppExports.R' 'coerce.R' 'connect.R' 'default.R'
         'export.R' 'names.R' 'query.R' 'quote.R' 'rownames.R' 'table.R'
         'transaction.R' 'utils.R' 'zzz.R'
-Packaged: 2018-05-06 17:03:59 UTC; kirill
+Packaged: 2019-12-02 21:18:59 UTC; kirill
 Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   Jeroen Ooms [aut] (<https://orcid.org/0000-0002-4035-0289>),
   David James [aut],
@@ -40,4 +40,4 @@ Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   RStudio [cph]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2018-05-06 20:21:29 UTC
+Date/Publication: 2019-12-02 21:50:02 UTC
