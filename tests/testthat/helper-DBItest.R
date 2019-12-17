@@ -7,4 +7,12 @@ DBItest::make_context(
     logical_return = function(x) as.integer(x),
     list_temporary_tables = FALSE
   ),
-  name = "RMariaDB")
+  name = "RMariaDB",
+  default_skip = c(
+    # result
+    "data_logical",                               # not an error: cannot cast to logical
+    "data_raw",                                   # not an error: can't cast to blob type
+
+    NULL
+  )
+)

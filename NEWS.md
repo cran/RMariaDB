@@ -1,3 +1,9 @@
+# RMariaDB 1.0.8
+
+- Implement `dbGetInfo()` according to the specification.
+- Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
+
+
 # RMariaDB 1.0.7
 
 - Get rid of `auto_ptr`, which causes `R CMD check` warnings on R-devel.

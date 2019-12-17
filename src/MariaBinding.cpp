@@ -51,9 +51,6 @@ void MariaBinding::init_binding(const List& params_) {
     if (j == 0) {
       n_rows = Rf_xlength(param);
     }
-    else if (n_rows != Rf_xlength(param)) {
-      stop("Parameter %i does not have length %d.", j + 1, n_rows);
-    }
 
     switch (type) {
     case MY_LGL:
@@ -147,7 +144,9 @@ bool MariaBinding::bind_next_row() {
         missing = true;
       } else {
         double val = REAL(col)[i];
+        LOG_VERBOSE << val;
         set_date_time_buffer(j, static_cast<time_t>(val * (types[j] == MY_DATE ? 86400.0 : 1.0)));
+        LOG_VERBOSE;
         bindings[j].buffer_length = sizeof(MYSQL_TIME);
         bindings[j].buffer = &time_buffers[j];
       }
@@ -173,8 +172,11 @@ bool MariaBinding::bind_next_row() {
     }
     is_null[j] = missing;
   }
+
+  LOG_VERBOSE << "Binding";
   mysql_stmt_bind_param(statement, &bindings[0]);
 
+  LOG_VERBOSE << "Done binding row" << i;
   i++;
   return true;
 }
@@ -188,7 +190,9 @@ void MariaBinding::binding_update(int j, enum_field_types type, int size) {
 }
 
 void MariaBinding::set_date_time_buffer(int j, time_t time) {
+  LOG_VERBOSE << time;
   struct tm* tm = gmtime(&time);
+  LOG_VERBOSE << tm;
 
   time_buffers[j].year = tm->tm_year + 1900;
   time_buffers[j].month = tm->tm_mon + 1 ;

@@ -6,11 +6,14 @@
 \alias{RMariaDB-package}
 \title{RMariaDB: Database Interface and 'MariaDB' Driver}
 \description{
-Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
+Implements a 'DBI'-compliant interface to 'MariaDB'
+    (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
+    databases.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://rmariadb.r-dbi.org}
   \item \url{https://github.com/r-dbi/RMariaDB}
   \item \url{https://downloads.mariadb.org/connector-c/}
   \item Report bugs at \url{https://github.com/r-dbi/RMariaDB/issues}
@@ -18,11 +21,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org} (0000-0002-1416-3412)
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
 
 Authors:
 \itemize{
-  \item Jeroen Ooms (0000-0002-4035-0289)
+  \item Jeroen Ooms (\href{https://orcid.org/0000-0002-4035-0289}{ORCID})
   \item David James
   \item Saikat DebRoy
   \item Hadley Wickham

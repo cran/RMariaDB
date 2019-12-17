@@ -1,14 +1,20 @@
-PKG_CPPFLAGS= -I../windows/libmariadbclient-2.3.5/include/mariadb
-PKG_LIBS= -L../windows/libmariadbclient-2.3.5/lib${R_ARCH} \
-	-lmariadbclient -lssl -lcrypto -lgdi32 -lz -lws2_32 -pthread
-CXX_STD=CXX11
+VERSION = 2.3.7
+RWINLIB = ../windows/libmariadbclient-$(VERSION)
 
+CXX_STD=CXX11
+PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
+PKG_LIBS= -L$(RWINLIB)/lib${R_ARCH} \
+	-lmariadbclient -lssl -lcrypto -lcrypt32 -lgdi32 -lz -lws2_32 -pthread
+
+# Necessary, so that the behavior of make called without arguments
+# is not changed:
 $(SHLIB):
 
+# We need winlibs (=headers) already for compiling each .o file
 $(OBJECTS): winlibs
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS)
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
