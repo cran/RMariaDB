@@ -1,6 +1,6 @@
-7a57a01cadad29283050fd2f2803bff7 *DESCRIPTION
+d4da2bbfbb14d2f466621fba376d3580 *DESCRIPTION
 563449eabe8b31e6b67d98e3d183834b *NAMESPACE
-1f0e9a3db9f9a06ab240d2211ec1088f *NEWS.md
+ecabcce2e9b2fadbf11e1b6a8afe77ce *NEWS.md
 810f4aa814a3886427da3fb6b930aef2 *R/MariaDBConnection.R
 0bf6935a363f1c900607dc47d2dd194e *R/MariaDBDriver.R
 cad38a4602121f635bb6e607bbb0c540 *R/MariaDBResult.R
@@ -14,7 +14,7 @@ ddc13b00bab7cd1ba971169caf5eb5f1 *R/default.R
 52c087536212d5ab701f4e445e83756a *R/query.R
 23634fa49f745bbee4a43478bec08e9e *R/quote.R
 83b90d3c09036238948a06e02516dd09 *R/rownames.R
-8735baa6cc0f9f94e98f6c51a4a6430c *R/table.R
+f83bdc847eda5bcf92d34707a9a38837 *R/table.R
 7b0e62ece5166ad0dc6c1de7cb1f559b *R/transaction.R
 7fd033962caa9afd897113adbb999c0b *R/utils.R
 9f82903040d7479bdfb228e05d1af323 *R/zzz.R
@@ -27,7 +27,7 @@ e056681588be6a43103f7701ffbd3122 *man/MariaDBConnection-class.Rd
 3778fa2e5626e99eb8e181cd7f831207 *man/MariaDBDriver-class.Rd
 49481d9831eb22d9371995cad710ad0d *man/MariaDBResult-class.Rd
 9053c474bd941e91547cb20236593e75 *man/RMariaDB-package.Rd
-db9f228810c69b65b9b3679c651dd819 *man/dbConnect-MariaDBDriver-method.Rd
+c15bbbf430b30b53f98246ff46a28509 *man/dbConnect-MariaDBDriver-method.Rd
 c269b4816c3949194a26c3b03d2c4576 *man/dbDataType.Rd
 e0af4961c6a90faa57048b829758ed96 *man/mariadb-quoting.Rd
 83d8e7c9369cee2ca62d5f5cd0e07a54 *man/mariadb-tables.Rd
@@ -59,7 +59,7 @@ ace085ffb1624ba3f84151b6f289222b *src/MariaRow.cpp
 e0151cc4471ef115c43832d0e593eed0 *src/MariaRow.h
 0c3bf3b18ab88646e5581b4578c1a29d *src/MariaTypes.cpp
 0c55c5f75963f210a00d0a509ddc3467 *src/MariaTypes.h
-f389b9c647accb56d589993997a20a4b *src/MariaUtils.cpp
+d7fa1f0a61fe6b24d92ddd9f6e486b9c *src/MariaUtils.cpp
 1b18e581e0506d600c3b0c8dd2087fa3 *src/MariaUtils.h
 5b9bba5a6b0cf22ba5949607ea1ec3f8 *src/RMariaDB_types.h
 d4f65ffeacac043f7055b1a6973ec9ba *src/RcppExports.cpp

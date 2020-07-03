@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
-Version: 1.0.8
+Version: 1.0.9
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -41,7 +41,7 @@ Suggests: DBItest (>= 1.7.0), rprojroot, testthat
 LinkingTo: BH, plogr, Rcpp
 Encoding: UTF-8
 NeedsCompilation: yes
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1.9000
 SystemRequirements: libmariadb-client-lgpl-dev or libmariadbclient-dev
         or libmysqlclient-dev, with libssl-dev (deb),
         mariadb-connector-c-devel or mariadb-devel (rpm),
@@ -50,7 +50,7 @@ Collate: 'MariaDBConnection.R' 'MariaDBDriver.R' 'MariaDBResult.R'
         'RMariaDB.R' 'RcppExports.R' 'coerce.R' 'connect.R' 'default.R'
         'export.R' 'names.R' 'query.R' 'quote.R' 'rownames.R' 'table.R'
         'transaction.R' 'utils.R' 'zzz.R'
-Packaged: 2019-12-17 20:42:40 UTC; kirill
+Packaged: 2020-07-03 15:29:57 UTC; kirill
 Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   Jeroen Ooms [aut] (<https://orcid.org/0000-0002-4035-0289>),
   David James [aut],
@@ -61,4 +61,4 @@ Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   RStudio [cph]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2019-12-18 00:00:16 UTC
+Date/Publication: 2020-07-03 17:00:19 UTC
