@@ -58,18 +58,20 @@ for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used.}
+\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
-\item{ssl.key}{(optional) string of the filename of the SSL key file to use.}
+\item{ssl.key}{(optional) string of the filename of the SSL key file to use.
+Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cert}{(optional) string of the filename of the SSL certificate to
-use.}
+use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.ca}{(optional) string of the filename of an SSL certificate
-authority file to use.}
+authority file to use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.capath}{(optional) string of the path to a directory containing
-the trusted SSL CA certificates in PEM format.}
+the trusted SSL CA certificates in PEM format. Expanded with
+\code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cipher}{(optional) string list of permitted ciphers to use for SSL
 encryption.}
@@ -108,6 +110,22 @@ See \url{https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.h
 for more details.
 Without installation, time zone support is restricted to UTC offset,
 which cannot take into account DST offsets.
+}
+
+\section{Secure passwords}{
+
+Avoid storing passwords hard-coded in the code, use e.g. the \pkg{keyring}
+package to store and retrieve passwords in a secure way.
+
+The MySQL client library (but not MariaDB) supports a \code{.mylogin.cnf} file
+that can be passed in the \code{default.file} argument.
+This file can contain an obfuscated password, which is not a secure way
+to store passwords but may be acceptable if the user is aware of the
+restrictions.
+The availability of this feature depends on the client library used
+for compiling the \pkg{RMariaDB} package.
+Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
+client library which do not support this feature.
 }
 
 \examples{

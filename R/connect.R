@@ -14,6 +14,20 @@ NULL
 #' Without installation, time zone support is restricted to UTC offset,
 #' which cannot take into account DST offsets.
 #'
+#' @section Secure passwords:
+#' Avoid storing passwords hard-coded in the code, use e.g. the \pkg{keyring}
+#' package to store and retrieve passwords in a secure way.
+#'
+#' The MySQL client library (but not MariaDB) supports a `.mylogin.cnf` file
+#' that can be passed in the `default.file` argument.
+#' This file can contain an obfuscated password, which is not a secure way
+#' to store passwords but may be acceptable if the user is aware of the
+#' restrictions.
+#' The availability of this feature depends on the client library used
+#' for compiling the \pkg{RMariaDB} package.
+#' Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
+#' client library which do not support this feature.
+#'
 #' @param drv an object of class [MariaDBDriver-class] or
 #'   [MariaDBConnection-class].
 #' @param username,password Username and password. If username omitted,
@@ -33,14 +47,16 @@ NULL
 #' @param default.file string of the filename with MariaDB client options,
 #'   only relevant if `groups` is given. The default value depends on the
 #'   operating system (see references), on Linux and OS X the files
-#'   `~/.my.cnf` and `~/.mylogin.cnf` are used.
+#'   `~/.my.cnf` and `~/.mylogin.cnf` are used. Expanded with [normalizePath()].
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
+#'   Expanded with [normalizePath()].
 #' @param ssl.cert (optional) string of the filename of the SSL certificate to
-#'   use.
+#'   use. Expanded with [normalizePath()].
 #' @param ssl.ca (optional) string of the filename of an SSL certificate
-#'   authority file to use.
+#'   authority file to use. Expanded with [normalizePath()].
 #' @param ssl.capath (optional) string of the path to a directory containing
-#'   the trusted SSL CA certificates in PEM format.
+#'   the trusted SSL CA certificates in PEM format. Expanded with
+#'   [normalizePath()].
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
@@ -100,6 +116,23 @@ setMethod("dbConnect", "MariaDBDriver",
       timeout <- -1L
     } else {
       timeout <- as.integer(timeout)
+    }
+
+    # Make sure that `~` is resolved correctly:
+    if (!is.null(default.file)) {
+      default.file <- normalizePath(default.file)
+    }
+    if (!is.null(ssl.key)) {
+      ssl.key <- normalizePath(ssl.key)
+    }
+    if (!is.null(ssl.cert)) {
+      ssl.cert <- normalizePath(ssl.cert)
+    }
+    if (!is.null(ssl.ca)) {
+      ssl.ca <- normalizePath(ssl.ca)
+    }
+    if (!is.null(ssl.capath)) {
+      ssl.capath <- normalizePath(ssl.capath)
     }
 
     ptr <- connection_create(

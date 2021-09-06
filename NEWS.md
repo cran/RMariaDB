@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.1.2 (2021-09-06)
+
+## Licensing
+
+- RMariaDB is now licensed under the MIT license (#213).
+
+## Features
+
+- `dbConnect()` normalizes all input paths (#197, @twentytitus).
+- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
+
+## Documentation
+
+- Now referring to the `libmariadb-dev` Debian/Ubuntu package in documentation and configuration scripts (#219).
+- `?dbConnect` gains a section on secure passwords and the `.mylogin.cnf` file (#156).
+
+## Internal
+
+- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
+
+- The `configure` script now queries the `RMARIADB_FORCE_MARIADBCONFIG` and `RMARIADB_FORCE_MYSQLCONFIG` environment variables to force use of `mariadb_config` or `mysql_config`, respectively (#218).
+
+
 # RMariaDB 1.1.1 (2021-04-12)
 
 ## Features
