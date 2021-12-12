@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.0 (2021-12-12)
+
+## Features
+
+- BLOBs are returned as `blob::blob()` objects (#126, #243).
+- `dbWriteTable()` and `dbAppendTable()` are much faster thanks to `LOAD DATA LOCAL INFILE`. To activate this, `load_data_local_infile = TRUE` must be passed to `dbConnect()`. The readr package is required (#11, #223).
+
+## Bug fixes
+
+- Writing dates prior to 1970 no longer crashes on Windows (#232, #245).
+
+## Internal
+
+- Add test for reading and writing JSON data type as string (#127, #246).
+- Update for compatibility with DBItest 1.7.2 (#228).
+
+
 # RMariaDB 1.1.2 (2021-09-06)
 
 ## Licensing
@@ -25,15 +42,9 @@
 
 # RMariaDB 1.1.1 (2021-04-12)
 
-## Features
-
-- `BIT(1)` columns are returned as `logical` (#84). `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
-- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
-
 ## Bug fixes
 
-- Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
-- Timestamp roundtrip no longer fails on Windows i386 (#117).
+- `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
 
 ## Internal
 
@@ -44,7 +55,7 @@
 
 ## Features
 
-- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+- `dbConnect()` now supports a `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
 - `BIT(1)` columns are returned as `logical` (#84).
 - `dbQuoteLiteral()` now correctly quotes difftime values (#188).
 
@@ -85,19 +96,19 @@
 - Check that input to `dbWriteTable()` is a data frame (#160, @rossholmberg).
 
 
-# RMariaDB 1.0.9
+# RMariaDB 1.0.9 (2020-07-03)
 
 - Use `VARCHAR` as data type for string columns (#159).
 - Encode column names as UTF-8 (#109).
 
 
-# RMariaDB 1.0.8
+# RMariaDB 1.0.8 (2019-12-17)
 
 - Implement `dbGetInfo()` according to the specification.
 - Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
 
 
-# RMariaDB 1.0.7
+# RMariaDB 1.0.7 (2019-12-02)
 
 - Get rid of `auto_ptr`, which causes `R CMD check` warnings on R-devel.
 

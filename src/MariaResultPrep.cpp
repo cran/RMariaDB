@@ -199,7 +199,7 @@ List MariaResultPrep::fetch(int n_max) {
     }
 
     ++i;
-    if (i % 1000 == 0)
+    if (i % 1024 == 0)
       checkUserInterrupt();
   }
 
@@ -225,7 +225,7 @@ int MariaResultPrep::n_rows_fetched() {
   return static_cast<int>(rowsFetched_);
 }
 
-bool MariaResultPrep::complete() {
+bool MariaResultPrep::complete() const {
   if (!bound_) return FALSE;
   return
     !has_result() || // query doesn't have results
