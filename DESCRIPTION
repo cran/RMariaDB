@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and MariaDB Driver
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -47,10 +47,45 @@ SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
         mariadb-connector-c-devel or mariadb-devel (rpm),
         mariadb-connector-c or mysql-connector-c (brew)
 Collate: 'MariaDBConnection.R' 'MariaDBDriver.R' 'MariaDBResult.R'
-        'RMariaDB.R' 'RcppExports.R' 'coerce.R' 'connect.R' 'default.R'
-        'export.R' 'names.R' 'query.R' 'quote.R' 'rownames.R' 'table.R'
-        'transaction.R' 'utils.R' 'zzz.R'
-Packaged: 2021-12-12 11:48:07 UTC; kirill
+        'RMariaDB-package.R' 'RcppExports.R' 'coerce.R'
+        'compatRowNames.R' 'connect.R'
+        'dbAppendTable_MariaDBConnection.R'
+        'dbBegin_MariaDBConnection.R' 'dbBind_MariaDBResult.R'
+        'dbClearResult_MariaDBResult.R' 'dbColumnInfo_MariaDBResult.R'
+        'dbCommit_MariaDBConnection.R' 'dbConnect_MariaDBDriver.R'
+        'dbDataType_MariaDBConnection.R' 'dbDataType_MariaDBDriver.R'
+        'dbDisconnect_MariaDBConnection.R'
+        'dbExistsTable_MariaDBConnection_character.R'
+        'dbFetch_MariaDBResult.R' 'dbGetInfo_MariaDBConnection.R'
+        'dbGetInfo_MariaDBDriver.R' 'dbGetRowCount_MariaDBResult.R'
+        'dbGetRowsAffected_MariaDBResult.R'
+        'dbGetStatement_MariaDBResult.R'
+        'dbHasCompleted_MariaDBResult.R'
+        'dbIsValid_MariaDBConnection.R' 'dbIsValid_MariaDBDriver.R'
+        'dbIsValid_MariaDBResult.R'
+        'dbListObjects_MariaDBConnection_ANY.R'
+        'dbListTables_MariaDBConnection.R'
+        'dbQuoteIdentifier_MariaDBConnection_Id.R'
+        'dbQuoteIdentifier_MariaDBConnection_SQL.R'
+        'dbQuoteIdentifier_MariaDBConnection_character.R'
+        'dbQuoteLiteral_MariaDBConnection.R'
+        'dbQuoteString_MariaDBConnection_SQL.R'
+        'dbQuoteString_MariaDBConnection_character.R'
+        'dbReadTable_MariaDBConnection_character.R'
+        'dbRemoveTable_MariaDBConnection_character.R'
+        'dbRollback_MariaDBConnection.R'
+        'dbSendQuery_MariaDBConnection_character.R'
+        'dbSendStatement_MariaDBConnection_character.R'
+        'dbUnloadDriver_MariaDBDriver.R'
+        'dbUnquoteIdentifier_MariaDBConnection_SQL.R'
+        'dbWriteTable_MariaDBConnection_character_character.R'
+        'dbWriteTable_MariaDBConnection_character_data.frame.R'
+        'default.R' 'export.R' 'names.R' 'query.R' 'quote.R'
+        'show_MariaDBConnection.R' 'sqlData_MariaDBConnection.R'
+        'table.R' 'transaction.R' 'utils.R' 'zzz.R'
+Config/autostyle/scope: line_breaks
+Config/autostyle/strict: false
+Packaged: 2021-12-20 04:51:59 UTC; kirill
 Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   Jeroen Ooms [aut] (<https://orcid.org/0000-0002-4035-0289>),
   David James [aut],
@@ -61,4 +96,4 @@ Author: Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
   RStudio [cph]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2021-12-12 12:20:02 UTC
+Date/Publication: 2021-12-20 05:10:02 UTC
