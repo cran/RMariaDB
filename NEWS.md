@@ -1,4 +1,28 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# RMariaDB 1.3.0 (2023-10-08)
+
+## Features
+
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 or server description contains `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Use string as default for JSON (#296) and all unknown column types (@LeeMendelowitz, #260).
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
+
+## Documentation
+
+- Better `MAX_NO_FIELD_TYPES` error message.
+
+## Chore
+
+- Update Windows libs to new location (#301).
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+- Add decor as a dependency.
+
+## Testing
+
+- Skip tests if packages are not available (#304).
+- Use testthat edition 3 (#285).
+
 
 # RMariaDB 1.2.2 (2022-06-19)
 
