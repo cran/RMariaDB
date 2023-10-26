@@ -36,7 +36,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, &local_infile);
   // Default to UTF-8
   mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
-  if (Rf_isNull(groups))
+  if (!Rf_isNull(groups))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
                   cpp11::as_cpp<std::string>(groups).c_str());
   if (!Rf_isNull(default_file))
@@ -185,9 +185,11 @@ bool DbConnection::exec(const std::string& sql) {
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     cpp11::stop("Error executing query: %s", mysql_error(pConn_));
 
-  MYSQL_RES* res = mysql_store_result(pConn_);
-  if (res != NULL)
-    mysql_free_result(res);
+  do {
+    MYSQL_RES* res = mysql_store_result(pConn_);
+    if (res != NULL)
+      mysql_free_result(res);
+  } while (mysql_next_result(pConn_) == 0);
 
   autocommit();
 
