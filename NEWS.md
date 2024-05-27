@@ -1,5 +1,37 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2 (2024-05-26)
+
+## Features
+
+- Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
+- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
+- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
+
+## Bug fixes
+
+- `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
+- `dbConnect()` can enable SSL based on `client_flag` again (@d-hansen, #322).
+- Fix `dbQuoteIdentifier()` for `Id()` objects (#323).
+
+## Chore
+
+- Improve `dbQuoteIdentifier()` for `Id()` objects (#324).
+- Avoid deprecated `mysql_ssl_set()` (#319).
+
+## Continuous integration
+
+- Turn off Windows for now (#326).
+
+## Documentation
+
+- Use dbitemplate (@maelle, #320).
+
+## Testing
+
+- Test for quoting columns with `dbQuoteIdentifier()` (@dpprdan, #254, #255).
+
+
 # RMariaDB 1.3.1 (2023-10-26)
 
 ## Features
