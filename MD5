@@ -1,7 +1,7 @@
-b0c02cb7de37e8221cf82b3a91ae2916 *DESCRIPTION
+18b2b10f6f8b49d649010224e9c4a95a *DESCRIPTION
 9176937916ec5229d97ae190f18ae8d4 *LICENSE
 a151fa3969b5df902830dea38ac25883 *NAMESPACE
-94303bc28d6ed4aace77eed93935ec2c *NEWS.md
+d11a923d296775326ee2c35d4344d0e9 *NEWS.md
 dd9e190a4c4f48296789a24fb0cd73fd *R/MariaDBConnection.R
 0e39ce42f23fa862ec61f975ed5b6e28 *R/MariaDBDriver.R
 f3e73d13165bbb34718763f985ec1534 *R/MariaDBResult.R
@@ -37,6 +37,7 @@ b49d59a17213456e1c8ac387e1e2b09c *R/dbQuoteIdentifier_MariaDBConnection_Id.R
 77e8085d0ee7edbb673c02613083c545 *R/dbQuoteIdentifier_MariaDBConnection_SQL.R
 00fc590f379a8e8bc2bc2df4cc8911cb *R/dbQuoteIdentifier_MariaDBConnection_character.R
 2e22e195da34dde41121b14c9c9cac7d *R/dbQuoteLiteral_MariaDBConnection.R
+7bda57e80899bc84e3ca35627d524c88 *R/dbQuoteLiteral_MySQLConnection.R
 6988ae4ca74ca4025f7e8ca5c019bee6 *R/dbQuoteString_MariaDBConnection_SQL.R
 e1d9ecdc7a25e020eecf2fdd09fd4648 *R/dbQuoteString_MariaDBConnection_character.R
 94a9f7ad8fa87d2684917eeece220ea7 *R/dbReadTable_MariaDBConnection_character.R
@@ -51,6 +52,7 @@ fe2d69766a24f6d527ec4204398f4ff5 *R/dbWriteTable_MariaDBConnection_character_dat
 af3288bca70ae70e9b05de5627d62b97 *R/default.R
 e8d6a2d09c36a4c0ef50b7a9881af209 *R/export.R
 5499a218ff5225b352bf7434eba63629 *R/query.R
+48c0643160a32ecf8983dc83f84282c1 *R/quote-mysql.R
 1e0adb86d1811a8105748fbcb3c5fe0a *R/quote.R
 0ff94a3e2ad2a50c5c5a3780dc155df8 *R/show_MariaDBConnection.R
 00fba582b671054bf828420b59fe0daa *R/sqlData_MariaDBConnection.R
@@ -73,6 +75,7 @@ ed2511ffe20407f63e1e7f1b0d1d0674 *man/mariadb-quoting.Rd
 b35576feaa2236ebbd20f4356c13f13c *man/mariadb-tables.Rd
 7eaffe59ae6c9e3ae7df6877bbfd429c *man/mariadbClientLibraryVersions.Rd
 a8683f821907576aabb0e6acd4f0cc0d *man/mariadbHasDefault.Rd
+b6dc8b6a788d205affffc3cc2f8eb258 *man/mysql-quoting.Rd
 9d2f23b15efdcf2c6443594c28486913 *man/query.Rd
 ab3e334858adafd39904d78c90b3b3e0 *man/reexports.Rd
 740778775cb63fb5ff480ca8bd43c6a5 *man/result-meta.Rd
@@ -85,7 +88,7 @@ fd5d0a675338325058475cfbe57c289b *src/DbResult.h
 0ee04a6660698334a2b241ae5d39d31d *src/DbResultImpl.h
 7b84d6ecac475683d91b56f02fac72ce *src/DbResultImplDecl.h
 b8a0f348903c5221267c1fc97871e9fa *src/Makevars.in
-30c86e0df68cbb10f8ff97916af37531 *src/Makevars.win
+d16804cfe25beeb0d7727c7d1cf511cd *src/Makevars.win
 874095c56b50725994eecb8aadfc30ac *src/MariaBinding.cpp
 52c303d95c155644fb970f3364236c0c *src/MariaBinding.h
 c5a4b1abc7aaa183c21d3d07e37a41ae *src/MariaResult.cpp

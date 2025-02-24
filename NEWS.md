@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4 (2025-02-24)
+
+## Windows
+
+- Use mariadbclient from Rtools if available (#383).
+
+## Bug fixes
+
+- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
+
+
 # RMariaDB 1.3.3 (2024-11-18)
 
 ## Bug fixes
