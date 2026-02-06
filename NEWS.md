@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.5 (2026-02-05)
+
+## Bug fixes
+
+- Correctly return `TIME` values before the epoch (@JoelNWilkins, #421).
+
+## Chore
+
+- Remove plogr (#428).
+
+- Format C++ code with clang-format.
+
+
 # RMariaDB 1.3.4 (2025-02-24)
 
 ## Windows
@@ -97,7 +110,7 @@
 
 # RMariaDB 1.2.2 (2022-06-19)
 
-## Features 
+## Features
 
 - `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 
